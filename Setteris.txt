@@ -1,0 +1,55 @@
+Python 3.8.10 (tags/v3.8.10:3d8993a, May  3 2021, 11:48:03) [MSC v.1928 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+>>> first_set = {'Alex', 'John', 'Gerog', 'Alex'}
+>>> print(type(first_set))
+<class 'set'>
+>>> print(first_set)
+{'Gerog', 'Alex', 'John'}
+>>> print(len(first_set))
+3
+>>> first_set.add('Max')
+>>> print(firs_set))
+SyntaxError: unmatched ')'
+>>> 
+>>> print(first_set)
+{'Gerog', 'Alex', 'John', 'Max'}
+>>> print('Maxim' in first_set)
+False
+>>> print('Max' in first_set)
+True
+>>> first_set.remove('Alex')
+>>> print(first_set)
+{'Gerog', 'John', 'Max'}
+>>> firs_set.clear()
+Traceback (most recent call last):
+  File "<pyshell#12>", line 1, in <module>
+    firs_set.clear()
+NameError: name 'firs_set' is not defined
+>>> first_set.clear()
+>>> print(first_set)
+set()
+>>> first_set = {'Alex', 'John', 'Gerog', 'Alex'}
+>>> second_set = {'Alexa', 'Joh', 'Gerog', 'Aalex'}
+>>> third_set = first_set.union(second_set)
+>>> print(third_set)
+{'Gerog', 'Aalex', 'Alex', 'Joh', 'John', 'Alexa'}
+>>> fourth_set = first_set.intersection(second_set)
+>>> print(fourth_set)
+{'Gerog'}
+>>> fifth_set = first_set.difference(second_set)
+>>> print(fifth_set)
+{'Alex', 'John'}
+>>> print(fifth_set - second_set)
+{'Alex', 'John'}
+>>> set1 = {1, 2, 3}
+>>> set3 = {1, 2, 3, 4, 5}
+>>> print(set1.issubset(set3))
+True
+>>> print(set3.issuperset(set1))
+True
+>>> print(set1[0])
+Traceback (most recent call last):
+  File "<pyshell#28>", line 1, in <module>
+    print(set1[0])
+TypeError: 'set' object is not subscriptable
+>>> 

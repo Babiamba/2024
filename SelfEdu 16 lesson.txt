@@ -1,0 +1,1851 @@
+indows PowerShell
+Copyright (C) 2009 Microsoft Corporation. All rights reserved.
+(venv) PS C:\Users\user\PycharmProjects\SelfEdu20230605> cd coolsite
+(venv) PS C:\Users\user\PycharmProjects\SelfEdu20230605\coolsite> python manage.py
+ runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified some issues:
+
+WARNINGS:
+women.Category: (models.W042) Auto-created primary key used when not defining a pr
+imary key type, by default 'django.db.models.AutoField'.
+        HINT: Configure the DEFAULT_AUTO_FIELD setting or the WomenConfig.default_
+auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.B
+igAutoField'.
+women.Women: (models.W042) Auto-created primary key used when not defining a prima
+ry key type, by default 'django.db.models.AutoField'.
+        HINT: Configure the DEFAULT_AUTO_FIELD setting or the WomenConfig.default_
+auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.B
+igAutoField'.
+
+System check identified 2 issues (0 silenced).
+June 21, 2023 - 16:17:40
+Django version 4.2.2, using settings 'coolsite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+[21/Jun/2023 16:17:52] "GET / HTTP/1.1" 200 13129
+[21/Jun/2023 16:17:52] "GET /media/photos/2021/01/18/elen-hog.jpg HTTP/1.1" 200 20
+615
+[21/Jun/2023 16:17:52,555] - Broken pipe from ('127.0.0.1', 51120)
+[21/Jun/2023 16:17:55] "GET /post/ftyughjghjgh/ HTTP/1.1" 200 2304
+[21/Jun/2023 16:17:58] "GET /category/aktrisy/ HTTP/1.1" 200 7374
+[21/Jun/2023 16:18:00] "GET / HTTP/1.1" 200 13129
+[21/Jun/2023 16:18:00,415] - Broken pipe from ('127.0.0.1', 51121)
+[21/Jun/2023 16:18:02] "GET /contact/ HTTP/1.1" 200 27
+(venv) PS C:\Users\user\PycharmProjects\SelfEdu20230605\coolsite> python manage.py
+ shell
+Python 3.8.8 (tags/v3.8.8:024d805, Feb 19 2021, 13:08:11) [MSC v.1928 32 bit (Inte
+l)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from women.models import *
+>>> Women.objects.all()
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ????????? ?????>
+]>
+>>> Women.objects.all()[:5]
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>]>
+>>> from django.db import connection
+>>> connection.queries
+[{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC
+ LIMIT 21', 'time': '0.016'}, {'sql': 'SELECT "women_women"."id", "women_women"."t
+itle", "women_women"."slug", "women_women"."content", "women_women"."photo", "wome
+n_women"."time_create", "women_women"."time_update", "women_women"."is_published",
+ "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DE
+SC, "women_women"."title" ASC LIMIT 5', 'time': '0.000'}]
+>>> Women.objects.order_by('id')
+<QuerySet [<Women: ????????? ?????>, <Women: ????????? ???????>, <Women: ?????? ??
+?????>, <Women: ????? ?????>, <Women: ??? ??????>, <Women: ?????? ??????>, <Women:
+ ???????>, <Women: ????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ???????
+?? ?????>, <Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+]>
+>>> Women.objects.order_by('pk')
+<QuerySet [<Women: ????????? ?????>, <Women: ????????? ???????>, <Women: ?????? ??
+?????>, <Women: ????? ?????>, <Women: ??? ??????>, <Women: ?????? ??????>, <Women:
+ ???????>, <Women: ????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ???????
+?? ?????>, <Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+]>
+>>> Women.objects.order_by('-pk')
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ????????? ?????>
+]>
+>>> Women.objects.all().reverse()
+<QuerySet [<Women: ????????? ?????>, <Women: ????????? ???????>, <Women: ?????? ??
+?????>, <Women: ????? ?????>, <Women: ??? ??????>, <Women: ?????? ??????>, <Women:
+ ???????>, <Women: ????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ???????
+?? ?????>, <Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+]>
+>>> Women.objects.filter(pk__lte=2)
+<QuerySet [<Women: ????????? ???????>, <Women: ????????? ?????>]>
+>>> Women.objects.filter(pk__gte=2)
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>]>
+>>> Women.objects.all(pk=2)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: all() got an unexpected keyword argument 'pk'
+>>> Women.objects.get(pk=2)
+<Women: ????????? ???????>
+>>> w = Women.objects.get(pk=1)
+>>> w.title
+'????????? ?????'
+>>> w.id
+1
+>>> w.pk
+1
+>>> w.cat
+<Category: ???????>
+>>> w.cat.name
+'???????'
+>>> c = Category.objects.get(pk=1)
+>>> c
+<Category: ???????>
+>>> c.women_set
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<l
+ocals>.RelatedManager object at 0x035E4718>
+>>> c.women_set.all()
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ?????>, <Women: ??? ??????>,
+<Women: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women:
+ ????????? ?????>]>
+>>> Women.objects.filter(title__contains='a')
+<QuerySet []>
+>>> connection.queries
+[{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC
+ LIMIT 21', 'time': '0.016'}, {'sql': 'SELECT "women_women"."id", "women_women"."t
+itle", "women_women"."slug", "women_women"."content", "women_women"."photo", "wome
+n_women"."time_create", "women_women"."time_update", "women_women"."is_published",
+ "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DE
+SC, "women_women"."title" ASC LIMIT 5', 'time': '0.000'}, {'sql': 'SELECT "women_w
+omen"."id", "women_women"."title", "women_women"."slug", "women_women"."content",
+"women_women"."photo", "women_women"."time_create", "women_women"."time_update", "
+women_women"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "w
+omen_women"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."i
+d", "women_women"."title", "women_women"."slug", "women_women"."content", "women_w
+omen"."photo", "women_women"."time_create", "women_women"."time_update", "women_wo
+men"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_wom
+en"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wom
+en_women"."title", "women_women"."slug", "women_women"."content", "women_women"."p
+hoto", "women_women"."time_create", "women_women"."time_update", "women_women"."is
+_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id"
+ DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_wome
+n"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+"women_women"."time_create", "women_women"."time_update", "women_women"."is_publis
+hed", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_creat
+e" ASC, "women_women"."title" DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "w
+omen_women"."id", "women_women"."title", "women_women"."slug", "women_women"."cont
+ent", "women_women"."photo", "women_women"."time_create", "women_women"."time_upda
+te", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE
+ "women_women"."id" <= 2 ORDER BY "women_women"."time_create" DESC, "women_women".
+"title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wome
+n_women"."title", "women_women"."slug", "women_women"."content", "women_women"."ph
+oto", "women_women"."time_create", "women_women"."time_update", "women_women"."is_
+published", "women_women"."cat_id" FROM "women_women" WHERE "women_women"."id" >=
+2 ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21',
+'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "wome
+n_women"."slug", "women_women"."content", "women_women"."photo", "women_women"."ti
+me_create", "women_women"."time_update", "women_women"."is_published", "women_wome
+n"."cat_id" FROM "women_women" WHERE "women_women"."id" = 2 LIMIT 21', 'time': '0.
+000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."s
+lug", "women_women"."content", "women_women"."photo", "women_women"."time_create",
+ "women_women"."time_update", "women_women"."is_published", "women_women"."cat_id"
+ FROM "women_women" WHERE "women_women"."id" = 1 LIMIT 21', 'time': '0.000'}, {'sq
+l': 'SELECT "women_category"."id", "women_category"."name", "women_category"."slug
+" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time': '0.000'
+}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_category
+"."slug" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time':
+'0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"
+."slug", "women_women"."content", "women_women"."photo", "women_women"."time_creat
+e", "women_women"."time_update", "women_women"."is_published", "women_women"."cat_
+id" FROM "women_women" WHERE "women_women"."cat_id" = 1 ORDER BY "women_women"."ti
+me_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wome
+n" WHERE "women_women"."title" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_women"."
+time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}]
+>>> Women.objects.filter(title__icontains='J')
+<QuerySet []>
+>>> Women.objects.filter(title__icontains='a')
+<QuerySet []>
+>>> Women.objects.filter(title__icontains='??')
+<QuerySet [<Women: ????????? ?????>, <Women: ?????? ???????>, <Women: ????????? ??
+?????>, <Women: ????????? ?????>]>
+>>> Women.objects.filter(pk__in=[2,5,11,12])
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ?????>, <Women: ??? ??????>,
+<Women: ????????? ???????>]>
+>>> Women.objects.filter(pk__in=[2,5,11,12], is_published=True)
+<QuerySet [<Women: ??? ??????>, <Women: ????????? ???????>]>
+>>> Women.objects.filter(cat__in=[1, 2])
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ????????? ?????>
+]>
+>>> Women.objects.filter(cat__in=[1, 3])
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ?????>, <Women: ??? ??????>,
+<Women: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women:
+ ????????? ?????>]>
+>>> cats = Category.objects.all()
+>>> Women.objects.filter(cat__in=cats)
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ????????? ?????>
+]>
+>>> from django.db.models import Q
+>>> Women.objects.filter(pk__lt=5, cat_id=2)
+<QuerySet []>
+>>> Women.objects.filter(Q(pk__lt=5) |Q(cat_id=2))
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ??????>, <Wome
+n: ??????>, <Women: ????? ?????>, <Women: ???????>, <Women: ?????? ??????>, <Women
+: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ?????
+???? ?????>]>
+>>> Women.objects.filter(Q(pk__lt=5) | Q(cat_id=2))
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ??????>, <Wome
+n: ??????>, <Women: ????? ?????>, <Women: ???????>, <Women: ?????? ??????>, <Women
+: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ?????
+???? ?????>]>
+>>> Women.objects.filter(Q(pk__lt=5) &  Q(cat_id=2))
+<QuerySet []>
+>>> Women.objects.filter(~Q(pk__lt=5) |  Q(cat_id=2))
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>]>
+>>> Women.objects.filter(~Q(pk__lt=5) &  Q(cat_id=2))
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ??????>, <Wome
+n: ??????>, <Women: ????? ?????>, <Women: ???????>, <Women: ?????? ??????>]>
+>>> Women.objects.first()
+<Women: ?????? ??????>
+>>> Women.objects.alla()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'alla'
+>>> Women.objects.all()
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ????????? ?????>
+]>
+>>> Women.objects.filter(pk=1)
+<QuerySet [<Women: ????????? ?????>]>
+>>> Women.objects.order_by('pk').first()
+<Women: ????????? ?????>
+>>> Women.objects.order_by('-pk').first()
+<Women: ?????? ??????>
+>>> Women.objects.order_by('pk').last()
+<Women: ?????? ??????>
+>>> Women.objects.order_by('-pk').last()
+<Women: ????????? ?????>
+>>> Women.objects.latest('time_update')
+<Women: ?????? ??????>
+>>> Women.objects.last('time_update')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+TypeError: last() takes 1 positional argument but 2 were given
+>>> Women.objects.last('pk' |'time_update')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: unsupported operand type(s) for |: 'str' and 'str'
+>>> Women.objects.latest('time_update')
+<Women: ?????? ??????>
+>>> Women.objects.earli\est('time_update')
+  File "<console>", line 1
+    Women.objects.earli\est('time_update')
+                                         ^
+SyntaxError: unexpected character after line continuation character
+>>> Women.objects.earliest('time_update')
+<Women: ????????? ?????>
+>>> Women.objects.order_by('title').earliest('time_update')
+<Women: ????????? ?????>
+>>> Women.objects.order_by('title').latest('time_update')
+<Women: ?????? ??????>
+>>> w = Women.objects.get(pk=7)
+>>> w
+<Women: ???????>
+>>> w.get_previous_by_time_update()\
+...
+...
+<Women: ?????? ??????>
+>>>
+>>> w.get_previous_by_time_update()\
+...
+...
+<Women: ?????? ??????>
+>>>
+>>> w.get_previous_by_time_update()
+<Women: ?????? ??????>
+>>> w.get_next_by_time_update()
+<Women: ????? ?????>
+>>> w.get_next_by_time_update(pk__gte=10)
+<Women: ??????>
+>>> Category.objects.create(name='Sportininkes', slug='sportininkes')
+<Category: Sportininkes>
+>>> c3 = Category.objects.get(pk=3)
+>>> c3
+<Category: Sportininkes>
+>>> c3.women_set.exists()
+False
+>>> c1 = Category.objects.get(pk=2)
+>>> c1.women_set.exists()
+True
+>>> c1.women_set.count()
+7
+>>> c3.women_set.count()
+0
+>>> Women.objects.filter(pk__gt=4).count()
+10
+>>> Women.objects.filter(cat_slug='aktrisy')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'cat_slug' into field. C
+hoices are: cat, cat_id, content, id, is_published, photo, slug, time_create, time
+_update, title
+>>> Women.objects.filter(cat__slug='aktrisy')
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ?????>, <Women: ??? ??????>,
+<Women: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women:
+ ????????? ?????>]>
+>>> Women.objects.filter(cat__in=[])
+<QuerySet []>
+>>> Women.objects.filter(cat__in=[1])
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ?????>, <Women: ??? ??????>,
+<Women: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women:
+ ????????? ?????>]>
+>>> Women.objects.filter(cat__name='')
+<QuerySet []>
+>>> Women.objects.filter(cat__name='1')
+<QuerySet []>
+>>> Women.objects.filter(cat__id='1')
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ?????>, <Women: ??? ??????>,
+<Women: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women:
+ ????????? ?????>]>
+>>> Women.objects.filter(cat='1')
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ?????>, <Women: ??? ??????>,
+<Women: ????? ?????>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women:
+ ????????? ?????>]>
+>>> connection.queries
+[{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC
+ LIMIT 21', 'time': '0.016'}, {'sql': 'SELECT "women_women"."id", "women_women"."t
+itle", "women_women"."slug", "women_women"."content", "women_women"."photo", "wome
+n_women"."time_create", "women_women"."time_update", "women_women"."is_published",
+ "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DE
+SC, "women_women"."title" ASC LIMIT 5', 'time': '0.000'}, {'sql': 'SELECT "women_w
+omen"."id", "women_women"."title", "women_women"."slug", "women_women"."content",
+"women_women"."photo", "women_women"."time_create", "women_women"."time_update", "
+women_women"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "w
+omen_women"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."i
+d", "women_women"."title", "women_women"."slug", "women_women"."content", "women_w
+omen"."photo", "women_women"."time_create", "women_women"."time_update", "women_wo
+men"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_wom
+en"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wom
+en_women"."title", "women_women"."slug", "women_women"."content", "women_women"."p
+hoto", "women_women"."time_create", "women_women"."time_update", "women_women"."is
+_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id"
+ DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_wome
+n"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+"women_women"."time_create", "women_women"."time_update", "women_women"."is_publis
+hed", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_creat
+e" ASC, "women_women"."title" DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "w
+omen_women"."id", "women_women"."title", "women_women"."slug", "women_women"."cont
+ent", "women_women"."photo", "women_women"."time_create", "women_women"."time_upda
+te", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE
+ "women_women"."id" <= 2 ORDER BY "women_women"."time_create" DESC, "women_women".
+"title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wome
+n_women"."title", "women_women"."slug", "women_women"."content", "women_women"."ph
+oto", "women_women"."time_create", "women_women"."time_update", "women_women"."is_
+published", "women_women"."cat_id" FROM "women_women" WHERE "women_women"."id" >=
+2 ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21',
+'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "wome
+n_women"."slug", "women_women"."content", "women_women"."photo", "women_women"."ti
+me_create", "women_women"."time_update", "women_women"."is_published", "women_wome
+n"."cat_id" FROM "women_women" WHERE "women_women"."id" = 2 LIMIT 21', 'time': '0.
+000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."s
+lug", "women_women"."content", "women_women"."photo", "women_women"."time_create",
+ "women_women"."time_update", "women_women"."is_published", "women_women"."cat_id"
+ FROM "women_women" WHERE "women_women"."id" = 1 LIMIT 21', 'time': '0.000'}, {'sq
+l': 'SELECT "women_category"."id", "women_category"."name", "women_category"."slug
+" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time': '0.000'
+}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_category
+"."slug" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time':
+'0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"
+."slug", "women_women"."content", "women_women"."photo", "women_women"."time_creat
+e", "women_women"."time_update", "women_women"."is_published", "women_women"."cat_
+id" FROM "women_women" WHERE "women_women"."cat_id" = 1 ORDER BY "women_women"."ti
+me_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wome
+n" WHERE "women_women"."title" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_women"."
+time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql':
+'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wo
+men"."content", "women_women"."photo", "women_women"."time_create", "women_women".
+"time_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wo
+men" WHERE "women_women"."title" LIKE \'%J%\' ESCAPE \'\\\' ORDER BY "women_women"
+."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.015'}, {'sql'
+: 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_
+women"."content", "women_women"."photo", "women_women"."time_create", "women_women
+"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_
+women" WHERE "women_women"."title" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_wome
+n"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sq
+l': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "wome
+n_women"."content", "women_women"."photo", "women_women"."time_create", "women_wom
+en"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "wome
+n_women" WHERE "women_women"."title" LIKE \'%??%\' ESCAPE \'\\\' ORDER BY "women_w
+omen"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" WHERE "women_women"."id" IN (2, 5, 11, 12) ORDER BY "women_women"."tim
+e_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SE
+LECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_women
+"."content", "women_women"."photo", "women_women"."time_create", "women_women"."ti
+me_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women
+" WHERE ("women_women"."is_published" AND "women_women"."id" IN (2, 5, 11, 12)) OR
+DER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'tim
+e': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_wo
+men"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_c
+reate", "women_women"."time_update", "women_women"."is_published", "women_women"."
+cat_id" FROM "women_women" WHERE "women_women"."cat_id" IN (1, 2) ORDER BY "women_
+women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" WHERE "women_women"."cat_id" IN (1, 3) ORDER BY "women_women"."time_c
+reate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.015'}, {'sql': 'SELEC
+T "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."
+content", "women_women"."photo", "women_women"."time_create", "women_women"."time_
+update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" W
+HERE "women_women"."cat_id" IN (SELECT "women_category"."id" FROM "women_category"
+) ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21',
+'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "wome
+n_women"."slug", "women_women"."content", "women_women"."photo", "women_women"."ti
+me_create", "women_women"."time_update", "women_women"."is_published", "women_wome
+n"."cat_id" FROM "women_women" WHERE ("women_women"."cat_id" = 2 AND "women_women"
+."id" < 5) ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LI
+MIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."titl
+e", "women_women"."slug", "women_women"."content", "women_women"."photo", "women_w
+omen"."time_create", "women_women"."time_update", "women_women"."is_published", "w
+omen_women"."cat_id" FROM "women_women" WHERE ("women_women"."id" < 5 OR "women_wo
+men"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "women_women"."title
+" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_wome
+n"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+"women_women"."time_create", "women_women"."time_update", "women_women"."is_publis
+hed", "women_women"."cat_id" FROM "women_women" WHERE ("women_women"."id" < 5 OR "
+women_women"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "women_women
+"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wo
+men_women"."title", "women_women"."slug", "women_women"."content", "women_women"."
+photo", "women_women"."time_create", "women_women"."time_update", "women_women"."i
+s_published", "women_women"."cat_id" FROM "women_women" WHERE ("women_women"."id"
+< 5 AND "women_women"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "wo
+men_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women".
+"id", "women_women"."title", "women_women"."slug", "women_women"."content", "women
+_women"."photo", "women_women"."time_create", "women_women"."time_update", "women_
+women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE (NOT ("wome
+n_women"."id" < 5) OR "women_women"."cat_id" = 2) ORDER BY "women_women"."time_cre
+ate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT
+"women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."co
+ntent", "women_women"."photo", "women_women"."time_create", "women_women"."time_up
+date", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHE
+RE (NOT ("women_women"."id" < 5) AND "women_women"."cat_id" = 2) ORDER BY "women_w
+omen"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC L
+IMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."titl
+e", "women_women"."slug", "women_women"."content", "women_women"."photo", "women_w
+omen"."time_create", "women_women"."time_update", "women_women"."is_published", "w
+omen_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DESC,
+ "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_wom
+en"."id", "women_women"."title", "women_women"."slug", "women_women"."content", "w
+omen_women"."photo", "women_women"."time_create", "women_women"."time_update", "wo
+men_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE "women_
+women"."id" = 1 ORDER BY "women_women"."time_create" DESC, "women_women"."title" A
+SC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women".
+"title", "women_women"."slug", "women_women"."content", "women_women"."photo", "wo
+men_women"."time_create", "women_women"."time_update", "women_women"."is_published
+", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id" ASC LIMIT
+ 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title",
+"women_women"."slug", "women_women"."content", "women_women"."photo", "women_women
+"."time_create", "women_women"."time_update", "women_women"."is_published", "women
+_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id" DESC LIMIT 1', 'ti
+me': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_w
+omen"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_
+create", "women_women"."time_update", "women_women"."is_published", "women_women".
+"cat_id" FROM "women_women" ORDER BY "women_women"."id" DESC LIMIT 1', 'time': '0.
+000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."s
+lug", "women_women"."content", "women_women"."photo", "women_women"."time_create",
+ "women_women"."time_update", "women_women"."is_published", "women_women"."cat_id"
+ FROM "women_women" ORDER BY "women_women"."id" ASC LIMIT 1', 'time': '0.000'}, {'
+sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "wo
+men_women"."content", "women_women"."photo", "women_women"."time_create", "women_w
+omen"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "wo
+men_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" ASC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" ASC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'},
+ {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" WHERE "women_women"."id" = 7 LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wome
+n" WHERE (("women_women"."time_update" = \'2021-01-17 06:28:41.856430\' AND "women
+_women"."id" < 7) OR "women_women"."time_update" < \'2021-01-17 06:28:41.856430\')
+ ORDER BY "women_women"."time_update" DESC, "women_women"."id" DESC LIMIT 1', 'tim
+e': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_wo
+men"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_c
+reate", "women_women"."time_update", "women_women"."is_published", "women_women"."
+cat_id" FROM "women_women" WHERE (("women_women"."time_update" = \'2021-01-17 06:2
+8:41.856430\' AND "women_women"."id" < 7) OR "women_women"."time_update" < \'2021-
+01-17 06:28:41.856430\') ORDER BY "women_women"."time_update" DESC, "women_women".
+"id" DESC LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_w
+omen"."title", "women_women"."slug", "women_women"."content", "women_women"."photo
+", "women_women"."time_create", "women_women"."time_update", "women_women"."is_pub
+lished", "women_women"."cat_id" FROM "women_women" WHERE (("women_women"."time_upd
+ate" = \'2021-01-17 06:28:41.856430\' AND "women_women"."id" < 7) OR "women_women"
+."time_update" < \'2021-01-17 06:28:41.856430\') ORDER BY "women_women"."time_upda
+te" DESC, "women_women"."id" DESC LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "wom
+en_women"."id", "women_women"."title", "women_women"."slug", "women_women"."conten
+t", "women_women"."photo", "women_women"."time_create", "women_women"."time_update
+", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE (
+("women_women"."time_update" = \'2021-01-17 06:28:41.856430\' AND "women_women"."i
+d" > 7) OR "women_women"."time_update" > \'2021-01-17 06:28:41.856430\') ORDER BY
+"women_women"."time_update" ASC, "women_women"."id" ASC LIMIT 1', 'time': '0.000'}
+, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+ "women_women"."content", "women_women"."photo", "women_women"."time_create", "wom
+en_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+ "women_women" WHERE ("women_women"."id" >= 10 AND (("women_women"."time_update" =
+ \'2021-01-17 06:28:41.856430\' AND "women_women"."id" > 7) OR "women_women"."time
+_update" > \'2021-01-17 06:28:41.856430\')) ORDER BY "women_women"."time_update" A
+SC, "women_women"."id" ASC LIMIT 1', 'time': '0.000'}, {'sql': 'INSERT INTO "women
+_category" ("name", "slug") VALUES (\'Sportininkes\', \'sportininkes\')', 'time':
+'0.109'}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_c
+ategory"."slug" FROM "women_category" WHERE "women_category"."id" = 3 LIMIT 21', '
+time': '0.000'}, {'sql': 'SELECT 1 AS "a" FROM "women_women" WHERE "women_women"."
+cat_id" = 3 LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_category"."id", "wo
+men_category"."name", "women_category"."slug" FROM "women_category" WHERE "women_c
+ategory"."id" = 2 LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT 1 AS "a" FROM "wome
+n_women" WHERE "women_women"."cat_id" = 2 LIMIT 1', 'time': '0.000'}, {'sql': 'SEL
+ECT COUNT(*) AS "__count" FROM "women_women" WHERE "women_women"."cat_id" = 2', 't
+ime': '0.000'}, {'sql': 'SELECT COUNT(*) AS "__count" FROM "women_women" WHERE "wo
+men_women"."cat_id" = 3', 'time': '0.000'}, {'sql': 'SELECT COUNT(*) AS "__count"
+FROM "women_women" WHERE "women_women"."id" > 4', 'time': '0.000'}, {'sql': 'SELEC
+T "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."
+content", "women_women"."photo", "women_women"."time_create", "women_women"."time_
+update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" I
+NNER JOIN "women_category" ON ("women_women"."cat_id" = "women_category"."id") WHE
+RE "women_category"."slug" = \'aktrisy\' ORDER BY "women_women"."time_create" DESC
+, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_wo
+men"."id", "women_women"."title", "women_women"."slug", "women_women"."content", "
+women_women"."photo", "women_women"."time_create", "women_women"."time_update", "w
+omen_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE "women
+_women"."cat_id" IN (1) ORDER BY "women_women"."time_create" DESC, "women_women"."
+title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women
+_women"."title", "women_women"."slug", "women_women"."content", "women_women"."pho
+to", "women_women"."time_create", "women_women"."time_update", "women_women"."is_p
+ublished", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_category" O
+N ("women_women"."cat_id" = "women_category"."id") WHERE "women_category"."name" =
+ \'\' ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 2
+1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "
+women_women"."slug", "women_women"."content", "women_women"."photo", "women_women"
+."time_create", "women_women"."time_update", "women_women"."is_published", "women_
+women"."cat_id" FROM "women_women" INNER JOIN "women_category" ON ("women_women"."
+cat_id" = "women_category"."id") WHERE "women_category"."name" = \'1\' ORDER BY "w
+omen_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.00
+0'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slu
+g", "women_women"."content", "women_women"."photo", "women_women"."time_create", "
+women_women"."time_update", "women_women"."is_published", "women_women"."cat_id" F
+ROM "women_women" WHERE "women_women"."cat_id" = 1 ORDER BY "women_women"."time_cr
+eate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT
+ "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."c
+ontent", "women_women"."photo", "women_women"."time_create", "women_women"."time_u
+pdate", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WH
+ERE "women_women"."cat_id" = 1 ORDER BY "women_women"."time_create" DESC, "women_w
+omen"."title" ASC LIMIT 21', 'time': '0.000'}]
+>>> Women.objects.filter(cat_name__contains='a')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'cat_name' into field. C
+hoices are: cat, cat_id, content, id, is_published, photo, slug, time_create, time
+_update, title
+>>> Women.objects.filter(cat_name__contains='c')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'cat_name' into field. C
+hoices are: cat, cat_id, content, id, is_published, photo, slug, time_create, time
+_update, title
+>>> Women.objects.filter(cat_-name__contains='c')
+  File "<console>", line 1
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+>>> Women.objects.filter(cat__name__contains='c')
+<QuerySet []>
+>>> Women.objects.filter(cat__name__contains='a')
+<QuerySet []>
+>>> Women.objects.filter(cat__name__contains='A')
+<QuerySet []>
+>>> Women.objects.filter(women__title__contains='a')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'women' into field. Choi
+ces are: cat, cat_id, content, id, is_published, photo, slug, time_create, time_up
+date, title
+>>> Women.objects.filter(women__title__contains='C')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'women' into field. Choi
+ces are: cat, cat_id, content, id, is_published, photo, slug, time_create, time_up
+date, title
+>>> Women.objects.filter(women__title__contains='c')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'women' into field. Choi
+ces are: cat, cat_id, content, id, is_published, photo, slug, time_create, time_up
+date, title
+>>> Women.objects.filter(women__title__contains='a')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'women' into field. Choi
+ces are: cat, cat_id, content, id, is_published, photo, slug, time_create, time_up
+date, title
+>>>
+>>> Women.objects.filter(women__title__contains='?')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1534, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1565, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1415, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1225, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta(
+))
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'women' into field. Choi
+ces are: cat, cat_id, content, id, is_published, photo, slug, time_create, time_up
+date, title
+>>> Category.objects.filter(women__title__contains='?')
+<QuerySet []>
+>>> Category.objects.filter(women__title__contains='a')
+<QuerySet []>
+>>> Category.objects.filter(women__title__contains='?').distinct
+<bound method QuerySet.distinct of <QuerySet []>>
+>>> Category.objects.filter(women__title__contains='?').distinct()
+<QuerySet []>
+>>> Women.objects.count()
+14
+>>> Women.objects.aggregate(Min('cat_id'))
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Min' is not defined
+>>> from django.db.models import *
+>>> Women.objects.aggregate(Min('cat_id'))
+{'cat_id__min': 1}
+>>> Women.objects.aggregate(Min('cat_id'), Max('cat_id'))
+{'cat_id__min': 1, 'cat_id__max': 2}
+>>> Women.objects.aggregate(cat_min=Min('cat_id'),cat_max= Max('cat_id'))
+{'cat_min': 1, 'cat_max': 2}
+>>> Women.objects.aggregate(res=Sum('cat_id') - Count('cat_id'))
+{'res': 7}
+>>> Women.objects.aggregate(res=Avg('cat_id'))
+{'res': 1.5}
+>>> Women.objects.filter(pk__gt=4).aggregate(res=Avg('cat_id'))
+{'res': 1.7}
+>>> w = Women.objects.get(pk=1)
+>>> w.title
+'????????? ?????'
+>>> w.slug
+'andzhelina-dzholi'
+>>> connection.queries
+[{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC
+ LIMIT 21', 'time': '0.016'}, {'sql': 'SELECT "women_women"."id", "women_women"."t
+itle", "women_women"."slug", "women_women"."content", "women_women"."photo", "wome
+n_women"."time_create", "women_women"."time_update", "women_women"."is_published",
+ "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DE
+SC, "women_women"."title" ASC LIMIT 5', 'time': '0.000'}, {'sql': 'SELECT "women_w
+omen"."id", "women_women"."title", "women_women"."slug", "women_women"."content",
+"women_women"."photo", "women_women"."time_create", "women_women"."time_update", "
+women_women"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "w
+omen_women"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."i
+d", "women_women"."title", "women_women"."slug", "women_women"."content", "women_w
+omen"."photo", "women_women"."time_create", "women_women"."time_update", "women_wo
+men"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_wom
+en"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wom
+en_women"."title", "women_women"."slug", "women_women"."content", "women_women"."p
+hoto", "women_women"."time_create", "women_women"."time_update", "women_women"."is
+_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id"
+ DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_wome
+n"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+"women_women"."time_create", "women_women"."time_update", "women_women"."is_publis
+hed", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_creat
+e" ASC, "women_women"."title" DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "w
+omen_women"."id", "women_women"."title", "women_women"."slug", "women_women"."cont
+ent", "women_women"."photo", "women_women"."time_create", "women_women"."time_upda
+te", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE
+ "women_women"."id" <= 2 ORDER BY "women_women"."time_create" DESC, "women_women".
+"title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wome
+n_women"."title", "women_women"."slug", "women_women"."content", "women_women"."ph
+oto", "women_women"."time_create", "women_women"."time_update", "women_women"."is_
+published", "women_women"."cat_id" FROM "women_women" WHERE "women_women"."id" >=
+2 ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21',
+'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "wome
+n_women"."slug", "women_women"."content", "women_women"."photo", "women_women"."ti
+me_create", "women_women"."time_update", "women_women"."is_published", "women_wome
+n"."cat_id" FROM "women_women" WHERE "women_women"."id" = 2 LIMIT 21', 'time': '0.
+000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."s
+lug", "women_women"."content", "women_women"."photo", "women_women"."time_create",
+ "women_women"."time_update", "women_women"."is_published", "women_women"."cat_id"
+ FROM "women_women" WHERE "women_women"."id" = 1 LIMIT 21', 'time': '0.000'}, {'sq
+l': 'SELECT "women_category"."id", "women_category"."name", "women_category"."slug
+" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time': '0.000'
+}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_category
+"."slug" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time':
+'0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"
+."slug", "women_women"."content", "women_women"."photo", "women_women"."time_creat
+e", "women_women"."time_update", "women_women"."is_published", "women_women"."cat_
+id" FROM "women_women" WHERE "women_women"."cat_id" = 1 ORDER BY "women_women"."ti
+me_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wome
+n" WHERE "women_women"."title" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_women"."
+time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql':
+'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wo
+men"."content", "women_women"."photo", "women_women"."time_create", "women_women".
+"time_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wo
+men" WHERE "women_women"."title" LIKE \'%J%\' ESCAPE \'\\\' ORDER BY "women_women"
+."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.015'}, {'sql'
+: 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_
+women"."content", "women_women"."photo", "women_women"."time_create", "women_women
+"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_
+women" WHERE "women_women"."title" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_wome
+n"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sq
+l': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "wome
+n_women"."content", "women_women"."photo", "women_women"."time_create", "women_wom
+en"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "wome
+n_women" WHERE "women_women"."title" LIKE \'%??%\' ESCAPE \'\\\' ORDER BY "women_w
+omen"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" WHERE "women_women"."id" IN (2, 5, 11, 12) ORDER BY "women_women"."tim
+e_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SE
+LECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_women
+"."content", "women_women"."photo", "women_women"."time_create", "women_women"."ti
+me_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women
+" WHERE ("women_women"."is_published" AND "women_women"."id" IN (2, 5, 11, 12)) OR
+DER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'tim
+e': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_wo
+men"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_c
+reate", "women_women"."time_update", "women_women"."is_published", "women_women"."
+cat_id" FROM "women_women" WHERE "women_women"."cat_id" IN (1, 2) ORDER BY "women_
+women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" WHERE "women_women"."cat_id" IN (1, 3) ORDER BY "women_women"."time_c
+reate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.015'}, {'sql': 'SELEC
+T "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."
+content", "women_women"."photo", "women_women"."time_create", "women_women"."time_
+update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" W
+HERE "women_women"."cat_id" IN (SELECT "women_category"."id" FROM "women_category"
+) ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21',
+'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "wome
+n_women"."slug", "women_women"."content", "women_women"."photo", "women_women"."ti
+me_create", "women_women"."time_update", "women_women"."is_published", "women_wome
+n"."cat_id" FROM "women_women" WHERE ("women_women"."cat_id" = 2 AND "women_women"
+."id" < 5) ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LI
+MIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."titl
+e", "women_women"."slug", "women_women"."content", "women_women"."photo", "women_w
+omen"."time_create", "women_women"."time_update", "women_women"."is_published", "w
+omen_women"."cat_id" FROM "women_women" WHERE ("women_women"."id" < 5 OR "women_wo
+men"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "women_women"."title
+" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_wome
+n"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+"women_women"."time_create", "women_women"."time_update", "women_women"."is_publis
+hed", "women_women"."cat_id" FROM "women_women" WHERE ("women_women"."id" < 5 OR "
+women_women"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "women_women
+"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wo
+men_women"."title", "women_women"."slug", "women_women"."content", "women_women"."
+photo", "women_women"."time_create", "women_women"."time_update", "women_women"."i
+s_published", "women_women"."cat_id" FROM "women_women" WHERE ("women_women"."id"
+< 5 AND "women_women"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "wo
+men_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women".
+"id", "women_women"."title", "women_women"."slug", "women_women"."content", "women
+_women"."photo", "women_women"."time_create", "women_women"."time_update", "women_
+women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE (NOT ("wome
+n_women"."id" < 5) OR "women_women"."cat_id" = 2) ORDER BY "women_women"."time_cre
+ate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT
+"women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."co
+ntent", "women_women"."photo", "women_women"."time_create", "women_women"."time_up
+date", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHE
+RE (NOT ("women_women"."id" < 5) AND "women_women"."cat_id" = 2) ORDER BY "women_w
+omen"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC L
+IMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."titl
+e", "women_women"."slug", "women_women"."content", "women_women"."photo", "women_w
+omen"."time_create", "women_women"."time_update", "women_women"."is_published", "w
+omen_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DESC,
+ "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_wom
+en"."id", "women_women"."title", "women_women"."slug", "women_women"."content", "w
+omen_women"."photo", "women_women"."time_create", "women_women"."time_update", "wo
+men_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE "women_
+women"."id" = 1 ORDER BY "women_women"."time_create" DESC, "women_women"."title" A
+SC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women".
+"title", "women_women"."slug", "women_women"."content", "women_women"."photo", "wo
+men_women"."time_create", "women_women"."time_update", "women_women"."is_published
+", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id" ASC LIMIT
+ 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title",
+"women_women"."slug", "women_women"."content", "women_women"."photo", "women_women
+"."time_create", "women_women"."time_update", "women_women"."is_published", "women
+_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id" DESC LIMIT 1', 'ti
+me': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_w
+omen"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_
+create", "women_women"."time_update", "women_women"."is_published", "women_women".
+"cat_id" FROM "women_women" ORDER BY "women_women"."id" DESC LIMIT 1', 'time': '0.
+000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."s
+lug", "women_women"."content", "women_women"."photo", "women_women"."time_create",
+ "women_women"."time_update", "women_women"."is_published", "women_women"."cat_id"
+ FROM "women_women" ORDER BY "women_women"."id" ASC LIMIT 1', 'time': '0.000'}, {'
+sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "wo
+men_women"."content", "women_women"."photo", "women_women"."time_create", "women_w
+omen"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "wo
+men_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" ASC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" ASC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'},
+ {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" WHERE "women_women"."id" = 7 LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wome
+n" WHERE (("women_women"."time_update" = \'2021-01-17 06:28:41.856430\' AND "women
+_women"."id" < 7) OR "women_women"."time_update" < \'2021-01-17 06:28:41.856430\')
+ ORDER BY "women_women"."time_update" DESC, "women_women"."id" DESC LIMIT 1', 'tim
+e': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_wo
+men"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_c
+reate", "women_women"."time_update", "women_women"."is_published", "women_women"."
+cat_id" FROM "women_women" WHERE (("women_women"."time_update" = \'2021-01-17 06:2
+8:41.856430\' AND "women_women"."id" < 7) OR "women_women"."time_update" < \'2021-
+01-17 06:28:41.856430\') ORDER BY "women_women"."time_update" DESC, "women_women".
+"id" DESC LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_w
+omen"."title", "women_women"."slug", "women_women"."content", "women_women"."photo
+", "women_women"."time_create", "women_women"."time_update", "women_women"."is_pub
+lished", "women_women"."cat_id" FROM "women_women" WHERE (("women_women"."time_upd
+ate" = \'2021-01-17 06:28:41.856430\' AND "women_women"."id" < 7) OR "women_women"
+."time_update" < \'2021-01-17 06:28:41.856430\') ORDER BY "women_women"."time_upda
+te" DESC, "women_women"."id" DESC LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "wom
+en_women"."id", "women_women"."title", "women_women"."slug", "women_women"."conten
+t", "women_women"."photo", "women_women"."time_create", "women_women"."time_update
+", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE (
+("women_women"."time_update" = \'2021-01-17 06:28:41.856430\' AND "women_women"."i
+d" > 7) OR "women_women"."time_update" > \'2021-01-17 06:28:41.856430\') ORDER BY
+"women_women"."time_update" ASC, "women_women"."id" ASC LIMIT 1', 'time': '0.000'}
+, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+ "women_women"."content", "women_women"."photo", "women_women"."time_create", "wom
+en_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+ "women_women" WHERE ("women_women"."id" >= 10 AND (("women_women"."time_update" =
+ \'2021-01-17 06:28:41.856430\' AND "women_women"."id" > 7) OR "women_women"."time
+_update" > \'2021-01-17 06:28:41.856430\')) ORDER BY "women_women"."time_update" A
+SC, "women_women"."id" ASC LIMIT 1', 'time': '0.000'}, {'sql': 'INSERT INTO "women
+_category" ("name", "slug") VALUES (\'Sportininkes\', \'sportininkes\')', 'time':
+'0.109'}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_c
+ategory"."slug" FROM "women_category" WHERE "women_category"."id" = 3 LIMIT 21', '
+time': '0.000'}, {'sql': 'SELECT 1 AS "a" FROM "women_women" WHERE "women_women"."
+cat_id" = 3 LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_category"."id", "wo
+men_category"."name", "women_category"."slug" FROM "women_category" WHERE "women_c
+ategory"."id" = 2 LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT 1 AS "a" FROM "wome
+n_women" WHERE "women_women"."cat_id" = 2 LIMIT 1', 'time': '0.000'}, {'sql': 'SEL
+ECT COUNT(*) AS "__count" FROM "women_women" WHERE "women_women"."cat_id" = 2', 't
+ime': '0.000'}, {'sql': 'SELECT COUNT(*) AS "__count" FROM "women_women" WHERE "wo
+men_women"."cat_id" = 3', 'time': '0.000'}, {'sql': 'SELECT COUNT(*) AS "__count"
+FROM "women_women" WHERE "women_women"."id" > 4', 'time': '0.000'}, {'sql': 'SELEC
+T "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."
+content", "women_women"."photo", "women_women"."time_create", "women_women"."time_
+update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" I
+NNER JOIN "women_category" ON ("women_women"."cat_id" = "women_category"."id") WHE
+RE "women_category"."slug" = \'aktrisy\' ORDER BY "women_women"."time_create" DESC
+, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_wo
+men"."id", "women_women"."title", "women_women"."slug", "women_women"."content", "
+women_women"."photo", "women_women"."time_create", "women_women"."time_update", "w
+omen_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE "women
+_women"."cat_id" IN (1) ORDER BY "women_women"."time_create" DESC, "women_women"."
+title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women
+_women"."title", "women_women"."slug", "women_women"."content", "women_women"."pho
+to", "women_women"."time_create", "women_women"."time_update", "women_women"."is_p
+ublished", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_category" O
+N ("women_women"."cat_id" = "women_category"."id") WHERE "women_category"."name" =
+ \'\' ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 2
+1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "
+women_women"."slug", "women_women"."content", "women_women"."photo", "women_women"
+."time_create", "women_women"."time_update", "women_women"."is_published", "women_
+women"."cat_id" FROM "women_women" INNER JOIN "women_category" ON ("women_women"."
+cat_id" = "women_category"."id") WHERE "women_category"."name" = \'1\' ORDER BY "w
+omen_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.00
+0'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slu
+g", "women_women"."content", "women_women"."photo", "women_women"."time_create", "
+women_women"."time_update", "women_women"."is_published", "women_women"."cat_id" F
+ROM "women_women" WHERE "women_women"."cat_id" = 1 ORDER BY "women_women"."time_cr
+eate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT
+ "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."c
+ontent", "women_women"."photo", "women_women"."time_create", "women_women"."time_u
+pdate", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WH
+ERE "women_women"."cat_id" = 1 ORDER BY "women_women"."time_create" DESC, "women_w
+omen"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id",
+ "women_women"."title", "women_women"."slug", "women_women"."content", "women_wome
+n"."photo", "women_women"."time_create", "women_women"."time_update", "women_women
+"."is_published", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_cate
+gory" ON ("women_women"."cat_id" = "women_category"."id") WHERE "women_category"."
+name" LIKE \'%c%\' ESCAPE \'\\\' ORDER BY "women_women"."time_create" DESC, "women
+_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id
+", "women_women"."title", "women_women"."slug", "women_women"."content", "women_wo
+men"."photo", "women_women"."time_create", "women_women"."time_update", "women_wom
+en"."is_published", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_ca
+tegory" ON ("women_women"."cat_id" = "women_category"."id") WHERE "women_category"
+."name" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_women"."time_create" DESC, "wom
+en_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."
+id", "women_women"."title", "women_women"."slug", "women_women"."content", "women_
+women"."photo", "women_women"."time_create", "women_women"."time_update", "women_w
+omen"."is_published", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_
+category" ON ("women_women"."cat_id" = "women_category"."id") WHERE "women_categor
+y"."name" LIKE \'%A%\' ESCAPE \'\\\' ORDER BY "women_women"."time_create" DESC, "w
+omen_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_catego
+ry"."id", "women_category"."name", "women_category"."slug" FROM "women_category" I
+NNER JOIN "women_women" ON ("women_category"."id" = "women_women"."cat_id") WHERE
+"women_women"."title" LIKE \'%?%\' ESCAPE \'\\\' ORDER BY "women_category"."id" AS
+C LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_category"."id", "women_categ
+ory"."name", "women_category"."slug" FROM "women_category" INNER JOIN "women_women
+" ON ("women_category"."id" = "women_women"."cat_id") WHERE "women_women"."title"
+LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_category"."id" ASC LIMIT 21', 'time': '
+0.000'}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_ca
+tegory"."slug" FROM "women_category" INNER JOIN "women_women" ON ("women_category"
+."id" = "women_women"."cat_id") WHERE "women_women"."title" LIKE \'%?%\' ESCAPE \'
+\\\' ORDER BY "women_category"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELE
+CT DISTINCT "women_category"."id", "women_category"."name", "women_category"."slug
+" FROM "women_category" INNER JOIN "women_women" ON ("women_category"."id" = "wome
+n_women"."cat_id") WHERE "women_women"."title" LIKE \'%?%\' ESCAPE \'\\\' ORDER BY
+ "women_category"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT COUNT(*) A
+S "__count" FROM "women_women"', 'time': '0.016'}, {'sql': 'SELECT MIN("women_wome
+n"."cat_id") AS "cat_id__min" FROM "women_women"', 'time': '0.000'}, {'sql': 'SELE
+CT MIN("women_women"."cat_id") AS "cat_id__min", MAX("women_women"."cat_id") AS "c
+at_id__max" FROM "women_women"', 'time': '0.016'}, {'sql': 'SELECT MIN("women_wome
+n"."cat_id") AS "cat_min", MAX("women_women"."cat_id") AS "cat_max" FROM "women_wo
+men"', 'time': '0.000'}, {'sql': 'SELECT (SUM("women_women"."cat_id") - COUNT("wom
+en_women"."cat_id")) AS "res" FROM "women_women"', 'time': '0.000'}, {'sql': 'SELE
+CT AVG("women_women"."cat_id") AS "res" FROM "women_women"', 'time': '0.000'}, {'s
+ql': 'SELECT AVG("women_women"."cat_id") AS "res" FROM "women_women" WHERE "women_
+women"."id" > 4', 'time': '0.016'}, {'sql': 'SELECT "women_women"."id", "women_wom
+en"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+ "women_women"."time_create", "women_women"."time_update", "women_women"."is_publi
+shed", "women_women"."cat_id" FROM "women_women" WHERE "women_women"."id" = 1 LIMI
+T 21', 'time': '0.000'}]
+>>> Women.objects.values('title', 'cat_id').get(pk=1)
+{'title': '????????? ?????', 'cat_id': 1}
+>>> Women.objects.values('title', 'cat_-name').get(pk=1)
+Traceback (most recent call last):
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 2150, in add_fields
+    join_info = self.setup_joins(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1812, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 1713, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'cat_-name' into field.
+Choices are: cat, cat_id, content, id, is_published, photo, slug, time_create, tim
+e_update, title
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1313, in values
+    clone = self._values(*fields, **expressions)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1308, in _values
+    clone.query.set_values(fields)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 2449, in set_values
+    self.add_fields(field_names, True)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\query.py", line 2183, in add_fields
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'cat_-name' into field.
+Choices are: cat, cat_id, content, id, is_published, photo, slug, time_create, tim
+e_update, title
+>>> Women.objects.values('title', 'cat__name').get(pk=1)
+{'title': '????????? ?????', 'cat__name': '???????'}
+>>> w = Women.objects.values('title', 'cat__name')
+>>> w
+<QuerySet [{'title': '?????? ??????', 'cat__name': '??????'}, {'title': '?????????
+ ????', 'cat__name': '??????'}, {'title': '?????? ??????', 'cat__name': '???????'}
+, {'title': '????????? ?????', 'cat__name': '???????'}, {'title': '??????', 'cat__
+name': '??????'}, {'title': '??????', 'cat__name': '??????'}, {'title': '????? ???
+??', 'cat__name': '??????'}, {'title': '???????', 'cat__name': '??????'}, {'title'
+: '?????? ??????', 'cat__name': '??????'}, {'title': '??? ??????', 'cat__name': '?
+??????'}, {'title': '????? ?????', 'cat__name': '???????'}, {'title': '?????? ????
+???', 'cat__name': '???????'}, {'title': '????????? ???????', 'cat__name': '??????
+?'}, {'title': '????????? ?????', 'cat__name': '???????'}]>
+>>> for p in w:
+... print(p['title'], p['cat__name'])
+  File "<console>", line 2
+    print(p['title'], p['cat__name'])
+    ^
+IndentationError: expected an indented block
+>>> for p in w:
+...     print(p['title'], p['cat__name'])
+...
+?????? ?????? ??????
+????????? ???? ??????
+?????? ?????? ???????
+????????? ????? ???????
+?????? ??????
+?????? ??????
+????? ????? ??????
+??????? ??????
+?????? ?????? ??????
+??? ?????? ???????
+????? ????? ???????
+?????? ??????? ???????
+????????? ??????? ???????
+????????? ????? ???????
+>>> Women.objects.values('cat_id').annotate(Count('id'))
+<QuerySet [{'cat_id': 1, 'id__count': 7}, {'cat_id': 2, 'id__count': 7}]>
+>>> Women.objects.annotate(Count('cat'))
+<QuerySet [<Women: ????????? ?????>, <Women: ????????? ???????>, <Women: ?????? ??
+?????>, <Women: ????? ?????>, <Women: ??? ??????>, <Women: ?????? ??????>, <Women:
+ ???????>, <Women: ????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ???????
+?? ?????>, <Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+]>
+>>> c= Category.objects.annotate(Count('women'))
+>>> c
+<QuerySet [<Category: Sportininkes>, <Category: ???????>, <Category: ??????>]>
+>>> c[0].women__count
+0
+>>> c[1].women__count
+7
+>>> c= Category.objects.annotate(total=Count('women'))
+>>> c[1].total
+7
+>>> len(c)
+3
+>>> c = Category.objects.annotate(total=Count('women')).filter(total__gt=0)
+>>> c
+<QuerySet [<Category: ???????>, <Category: ??????>]>
+>>> from django.db.models import F
+>>> Women.objects.filter(pk__gt=F('cat_id'))
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>]>
+>>> queries.connection
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'queries' is not defined
+>>> connection.queries
+[{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC
+ LIMIT 21', 'time': '0.016'}, {'sql': 'SELECT "women_women"."id", "women_women"."t
+itle", "women_women"."slug", "women_women"."content", "women_women"."photo", "wome
+n_women"."time_create", "women_women"."time_update", "women_women"."is_published",
+ "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DE
+SC, "women_women"."title" ASC LIMIT 5', 'time': '0.000'}, {'sql': 'SELECT "women_w
+omen"."id", "women_women"."title", "women_women"."slug", "women_women"."content",
+"women_women"."photo", "women_women"."time_create", "women_women"."time_update", "
+women_women"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "w
+omen_women"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."i
+d", "women_women"."title", "women_women"."slug", "women_women"."content", "women_w
+omen"."photo", "women_women"."time_create", "women_women"."time_update", "women_wo
+men"."is_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_wom
+en"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wom
+en_women"."title", "women_women"."slug", "women_women"."content", "women_women"."p
+hoto", "women_women"."time_create", "women_women"."time_update", "women_women"."is
+_published", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id"
+ DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_wome
+n"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+"women_women"."time_create", "women_women"."time_update", "women_women"."is_publis
+hed", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_creat
+e" ASC, "women_women"."title" DESC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "w
+omen_women"."id", "women_women"."title", "women_women"."slug", "women_women"."cont
+ent", "women_women"."photo", "women_women"."time_create", "women_women"."time_upda
+te", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE
+ "women_women"."id" <= 2 ORDER BY "women_women"."time_create" DESC, "women_women".
+"title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wome
+n_women"."title", "women_women"."slug", "women_women"."content", "women_women"."ph
+oto", "women_women"."time_create", "women_women"."time_update", "women_women"."is_
+published", "women_women"."cat_id" FROM "women_women" WHERE "women_women"."id" >=
+2 ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21',
+'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "wome
+n_women"."slug", "women_women"."content", "women_women"."photo", "women_women"."ti
+me_create", "women_women"."time_update", "women_women"."is_published", "women_wome
+n"."cat_id" FROM "women_women" WHERE "women_women"."id" = 2 LIMIT 21', 'time': '0.
+000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."s
+lug", "women_women"."content", "women_women"."photo", "women_women"."time_create",
+ "women_women"."time_update", "women_women"."is_published", "women_women"."cat_id"
+ FROM "women_women" WHERE "women_women"."id" = 1 LIMIT 21', 'time': '0.000'}, {'sq
+l': 'SELECT "women_category"."id", "women_category"."name", "women_category"."slug
+" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time': '0.000'
+}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_category
+"."slug" FROM "women_category" WHERE "women_category"."id" = 1 LIMIT 21', 'time':
+'0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"
+."slug", "women_women"."content", "women_women"."photo", "women_women"."time_creat
+e", "women_women"."time_update", "women_women"."is_published", "women_women"."cat_
+id" FROM "women_women" WHERE "women_women"."cat_id" = 1 ORDER BY "women_women"."ti
+me_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wome
+n" WHERE "women_women"."title" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_women"."
+time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql':
+'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wo
+men"."content", "women_women"."photo", "women_women"."time_create", "women_women".
+"time_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wo
+men" WHERE "women_women"."title" LIKE \'%J%\' ESCAPE \'\\\' ORDER BY "women_women"
+."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.015'}, {'sql'
+: 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_
+women"."content", "women_women"."photo", "women_women"."time_create", "women_women
+"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_
+women" WHERE "women_women"."title" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_wome
+n"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sq
+l': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "wome
+n_women"."content", "women_women"."photo", "women_women"."time_create", "women_wom
+en"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "wome
+n_women" WHERE "women_women"."title" LIKE \'%??%\' ESCAPE \'\\\' ORDER BY "women_w
+omen"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" WHERE "women_women"."id" IN (2, 5, 11, 12) ORDER BY "women_women"."tim
+e_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SE
+LECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_women
+"."content", "women_women"."photo", "women_women"."time_create", "women_women"."ti
+me_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women
+" WHERE ("women_women"."is_published" AND "women_women"."id" IN (2, 5, 11, 12)) OR
+DER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'tim
+e': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_wo
+men"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_c
+reate", "women_women"."time_update", "women_women"."is_published", "women_women"."
+cat_id" FROM "women_women" WHERE "women_women"."cat_id" IN (1, 2) ORDER BY "women_
+women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" WHERE "women_women"."cat_id" IN (1, 3) ORDER BY "women_women"."time_c
+reate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.015'}, {'sql': 'SELEC
+T "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."
+content", "women_women"."photo", "women_women"."time_create", "women_women"."time_
+update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" W
+HERE "women_women"."cat_id" IN (SELECT "women_category"."id" FROM "women_category"
+) ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21',
+'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "wome
+n_women"."slug", "women_women"."content", "women_women"."photo", "women_women"."ti
+me_create", "women_women"."time_update", "women_women"."is_published", "women_wome
+n"."cat_id" FROM "women_women" WHERE ("women_women"."cat_id" = 2 AND "women_women"
+."id" < 5) ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LI
+MIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."titl
+e", "women_women"."slug", "women_women"."content", "women_women"."photo", "women_w
+omen"."time_create", "women_women"."time_update", "women_women"."is_published", "w
+omen_women"."cat_id" FROM "women_women" WHERE ("women_women"."id" < 5 OR "women_wo
+men"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "women_women"."title
+" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_wome
+n"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+"women_women"."time_create", "women_women"."time_update", "women_women"."is_publis
+hed", "women_women"."cat_id" FROM "women_women" WHERE ("women_women"."id" < 5 OR "
+women_women"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "women_women
+"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "wo
+men_women"."title", "women_women"."slug", "women_women"."content", "women_women"."
+photo", "women_women"."time_create", "women_women"."time_update", "women_women"."i
+s_published", "women_women"."cat_id" FROM "women_women" WHERE ("women_women"."id"
+< 5 AND "women_women"."cat_id" = 2) ORDER BY "women_women"."time_create" DESC, "wo
+men_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women".
+"id", "women_women"."title", "women_women"."slug", "women_women"."content", "women
+_women"."photo", "women_women"."time_create", "women_women"."time_update", "women_
+women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE (NOT ("wome
+n_women"."id" < 5) OR "women_women"."cat_id" = 2) ORDER BY "women_women"."time_cre
+ate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT
+"women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."co
+ntent", "women_women"."photo", "women_women"."time_create", "women_women"."time_up
+date", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHE
+RE (NOT ("women_women"."id" < 5) AND "women_women"."cat_id" = 2) ORDER BY "women_w
+omen"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC L
+IMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."titl
+e", "women_women"."slug", "women_women"."content", "women_women"."photo", "women_w
+omen"."time_create", "women_women"."time_update", "women_women"."is_published", "w
+omen_women"."cat_id" FROM "women_women" ORDER BY "women_women"."time_create" DESC,
+ "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_wom
+en"."id", "women_women"."title", "women_women"."slug", "women_women"."content", "w
+omen_women"."photo", "women_women"."time_create", "women_women"."time_update", "wo
+men_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE "women_
+women"."id" = 1 ORDER BY "women_women"."time_create" DESC, "women_women"."title" A
+SC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women".
+"title", "women_women"."slug", "women_women"."content", "women_women"."photo", "wo
+men_women"."time_create", "women_women"."time_update", "women_women"."is_published
+", "women_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id" ASC LIMIT
+ 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title",
+"women_women"."slug", "women_women"."content", "women_women"."photo", "women_women
+"."time_create", "women_women"."time_update", "women_women"."is_published", "women
+_women"."cat_id" FROM "women_women" ORDER BY "women_women"."id" DESC LIMIT 1', 'ti
+me': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_w
+omen"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_
+create", "women_women"."time_update", "women_women"."is_published", "women_women".
+"cat_id" FROM "women_women" ORDER BY "women_women"."id" DESC LIMIT 1', 'time': '0.
+000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."s
+lug", "women_women"."content", "women_women"."photo", "women_women"."time_create",
+ "women_women"."time_update", "women_women"."is_published", "women_women"."cat_id"
+ FROM "women_women" ORDER BY "women_women"."id" ASC LIMIT 1', 'time': '0.000'}, {'
+sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "wo
+men_women"."content", "women_women"."photo", "women_women"."time_create", "women_w
+omen"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "wo
+men_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'}, {
+'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "w
+omen_women"."content", "women_women"."photo", "women_women"."time_create", "women_
+women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "w
+omen_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" ASC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" ASC LIMIT 1', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug", "
+women_women"."content", "women_women"."photo", "women_women"."time_create", "women
+_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM "
+women_women" ORDER BY "women_women"."time_update" DESC LIMIT 1', 'time': '0.000'},
+ {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+"women_women"."content", "women_women"."photo", "women_women"."time_create", "wome
+n_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+"women_women" WHERE "women_women"."id" = 7 LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id" FROM "women_wome
+n" WHERE (("women_women"."time_update" = \'2021-01-17 06:28:41.856430\' AND "women
+_women"."id" < 7) OR "women_women"."time_update" < \'2021-01-17 06:28:41.856430\')
+ ORDER BY "women_women"."time_update" DESC, "women_women"."id" DESC LIMIT 1', 'tim
+e': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_wo
+men"."slug", "women_women"."content", "women_women"."photo", "women_women"."time_c
+reate", "women_women"."time_update", "women_women"."is_published", "women_women"."
+cat_id" FROM "women_women" WHERE (("women_women"."time_update" = \'2021-01-17 06:2
+8:41.856430\' AND "women_women"."id" < 7) OR "women_women"."time_update" < \'2021-
+01-17 06:28:41.856430\') ORDER BY "women_women"."time_update" DESC, "women_women".
+"id" DESC LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_w
+omen"."title", "women_women"."slug", "women_women"."content", "women_women"."photo
+", "women_women"."time_create", "women_women"."time_update", "women_women"."is_pub
+lished", "women_women"."cat_id" FROM "women_women" WHERE (("women_women"."time_upd
+ate" = \'2021-01-17 06:28:41.856430\' AND "women_women"."id" < 7) OR "women_women"
+."time_update" < \'2021-01-17 06:28:41.856430\') ORDER BY "women_women"."time_upda
+te" DESC, "women_women"."id" DESC LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "wom
+en_women"."id", "women_women"."title", "women_women"."slug", "women_women"."conten
+t", "women_women"."photo", "women_women"."time_create", "women_women"."time_update
+", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE (
+("women_women"."time_update" = \'2021-01-17 06:28:41.856430\' AND "women_women"."i
+d" > 7) OR "women_women"."time_update" > \'2021-01-17 06:28:41.856430\') ORDER BY
+"women_women"."time_update" ASC, "women_women"."id" ASC LIMIT 1', 'time': '0.000'}
+, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slug",
+ "women_women"."content", "women_women"."photo", "women_women"."time_create", "wom
+en_women"."time_update", "women_women"."is_published", "women_women"."cat_id" FROM
+ "women_women" WHERE ("women_women"."id" >= 10 AND (("women_women"."time_update" =
+ \'2021-01-17 06:28:41.856430\' AND "women_women"."id" > 7) OR "women_women"."time
+_update" > \'2021-01-17 06:28:41.856430\')) ORDER BY "women_women"."time_update" A
+SC, "women_women"."id" ASC LIMIT 1', 'time': '0.000'}, {'sql': 'INSERT INTO "women
+_category" ("name", "slug") VALUES (\'Sportininkes\', \'sportininkes\')', 'time':
+'0.109'}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_c
+ategory"."slug" FROM "women_category" WHERE "women_category"."id" = 3 LIMIT 21', '
+time': '0.000'}, {'sql': 'SELECT 1 AS "a" FROM "women_women" WHERE "women_women"."
+cat_id" = 3 LIMIT 1', 'time': '0.000'}, {'sql': 'SELECT "women_category"."id", "wo
+men_category"."name", "women_category"."slug" FROM "women_category" WHERE "women_c
+ategory"."id" = 2 LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT 1 AS "a" FROM "wome
+n_women" WHERE "women_women"."cat_id" = 2 LIMIT 1', 'time': '0.000'}, {'sql': 'SEL
+ECT COUNT(*) AS "__count" FROM "women_women" WHERE "women_women"."cat_id" = 2', 't
+ime': '0.000'}, {'sql': 'SELECT COUNT(*) AS "__count" FROM "women_women" WHERE "wo
+men_women"."cat_id" = 3', 'time': '0.000'}, {'sql': 'SELECT COUNT(*) AS "__count"
+FROM "women_women" WHERE "women_women"."id" > 4', 'time': '0.000'}, {'sql': 'SELEC
+T "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."
+content", "women_women"."photo", "women_women"."time_create", "women_women"."time_
+update", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" I
+NNER JOIN "women_category" ON ("women_women"."cat_id" = "women_category"."id") WHE
+RE "women_category"."slug" = \'aktrisy\' ORDER BY "women_women"."time_create" DESC
+, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_wo
+men"."id", "women_women"."title", "women_women"."slug", "women_women"."content", "
+women_women"."photo", "women_women"."time_create", "women_women"."time_update", "w
+omen_women"."is_published", "women_women"."cat_id" FROM "women_women" WHERE "women
+_women"."cat_id" IN (1) ORDER BY "women_women"."time_create" DESC, "women_women"."
+title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women
+_women"."title", "women_women"."slug", "women_women"."content", "women_women"."pho
+to", "women_women"."time_create", "women_women"."time_update", "women_women"."is_p
+ublished", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_category" O
+N ("women_women"."cat_id" = "women_category"."id") WHERE "women_category"."name" =
+ \'\' ORDER BY "women_women"."time_create" DESC, "women_women"."title" ASC LIMIT 2
+1', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "
+women_women"."slug", "women_women"."content", "women_women"."photo", "women_women"
+."time_create", "women_women"."time_update", "women_women"."is_published", "women_
+women"."cat_id" FROM "women_women" INNER JOIN "women_category" ON ("women_women"."
+cat_id" = "women_category"."id") WHERE "women_category"."name" = \'1\' ORDER BY "w
+omen_women"."time_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.00
+0'}, {'sql': 'SELECT "women_women"."id", "women_women"."title", "women_women"."slu
+g", "women_women"."content", "women_women"."photo", "women_women"."time_create", "
+women_women"."time_update", "women_women"."is_published", "women_women"."cat_id" F
+ROM "women_women" WHERE "women_women"."cat_id" = 1 ORDER BY "women_women"."time_cr
+eate" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT
+ "women_women"."id", "women_women"."title", "women_women"."slug", "women_women"."c
+ontent", "women_women"."photo", "women_women"."time_create", "women_women"."time_u
+pdate", "women_women"."is_published", "women_women"."cat_id" FROM "women_women" WH
+ERE "women_women"."cat_id" = 1 ORDER BY "women_women"."time_create" DESC, "women_w
+omen"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id",
+ "women_women"."title", "women_women"."slug", "women_women"."content", "women_wome
+n"."photo", "women_women"."time_create", "women_women"."time_update", "women_women
+"."is_published", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_cate
+gory" ON ("women_women"."cat_id" = "women_category"."id") WHERE "women_category"."
+name" LIKE \'%c%\' ESCAPE \'\\\' ORDER BY "women_women"."time_create" DESC, "women
+_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id
+", "women_women"."title", "women_women"."slug", "women_women"."content", "women_wo
+men"."photo", "women_women"."time_create", "women_women"."time_update", "women_wom
+en"."is_published", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_ca
+tegory" ON ("women_women"."cat_id" = "women_category"."id") WHERE "women_category"
+."name" LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_women"."time_create" DESC, "wom
+en_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."
+id", "women_women"."title", "women_women"."slug", "women_women"."content", "women_
+women"."photo", "women_women"."time_create", "women_women"."time_update", "women_w
+omen"."is_published", "women_women"."cat_id" FROM "women_women" INNER JOIN "women_
+category" ON ("women_women"."cat_id" = "women_category"."id") WHERE "women_categor
+y"."name" LIKE \'%A%\' ESCAPE \'\\\' ORDER BY "women_women"."time_create" DESC, "w
+omen_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_catego
+ry"."id", "women_category"."name", "women_category"."slug" FROM "women_category" I
+NNER JOIN "women_women" ON ("women_category"."id" = "women_women"."cat_id") WHERE
+"women_women"."title" LIKE \'%?%\' ESCAPE \'\\\' ORDER BY "women_category"."id" AS
+C LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_category"."id", "women_categ
+ory"."name", "women_category"."slug" FROM "women_category" INNER JOIN "women_women
+" ON ("women_category"."id" = "women_women"."cat_id") WHERE "women_women"."title"
+LIKE \'%a%\' ESCAPE \'\\\' ORDER BY "women_category"."id" ASC LIMIT 21', 'time': '
+0.000'}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_ca
+tegory"."slug" FROM "women_category" INNER JOIN "women_women" ON ("women_category"
+."id" = "women_women"."cat_id") WHERE "women_women"."title" LIKE \'%?%\' ESCAPE \'
+\\\' ORDER BY "women_category"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELE
+CT DISTINCT "women_category"."id", "women_category"."name", "women_category"."slug
+" FROM "women_category" INNER JOIN "women_women" ON ("women_category"."id" = "wome
+n_women"."cat_id") WHERE "women_women"."title" LIKE \'%?%\' ESCAPE \'\\\' ORDER BY
+ "women_category"."id" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT COUNT(*) A
+S "__count" FROM "women_women"', 'time': '0.016'}, {'sql': 'SELECT MIN("women_wome
+n"."cat_id") AS "cat_id__min" FROM "women_women"', 'time': '0.000'}, {'sql': 'SELE
+CT MIN("women_women"."cat_id") AS "cat_id__min", MAX("women_women"."cat_id") AS "c
+at_id__max" FROM "women_women"', 'time': '0.016'}, {'sql': 'SELECT MIN("women_wome
+n"."cat_id") AS "cat_min", MAX("women_women"."cat_id") AS "cat_max" FROM "women_wo
+men"', 'time': '0.000'}, {'sql': 'SELECT (SUM("women_women"."cat_id") - COUNT("wom
+en_women"."cat_id")) AS "res" FROM "women_women"', 'time': '0.000'}, {'sql': 'SELE
+CT AVG("women_women"."cat_id") AS "res" FROM "women_women"', 'time': '0.000'}, {'s
+ql': 'SELECT AVG("women_women"."cat_id") AS "res" FROM "women_women" WHERE "women_
+women"."id" > 4', 'time': '0.016'}, {'sql': 'SELECT "women_women"."id", "women_wom
+en"."title", "women_women"."slug", "women_women"."content", "women_women"."photo",
+ "women_women"."time_create", "women_women"."time_update", "women_women"."is_publi
+shed", "women_women"."cat_id" FROM "women_women" WHERE "women_women"."id" = 1 LIMI
+T 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."title", "women_women"."cat
+_id" FROM "women_women" WHERE "women_women"."id" = 1 LIMIT 21', 'time': '0.000'},
+{'sql': 'SELECT "women_women"."title", "women_category"."name" FROM "women_women"
+INNER JOIN "women_category" ON ("women_women"."cat_id" = "women_category"."id") WH
+ERE "women_women"."id" = 1 LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_wom
+en"."title", "women_category"."name" FROM "women_women" INNER JOIN "women_category
+" ON ("women_women"."cat_id" = "women_category"."id") ORDER BY "women_women"."time
+_create" DESC, "women_women"."title" ASC LIMIT 21', 'time': '0.000'}, {'sql': 'SEL
+ECT "women_women"."title", "women_category"."name" FROM "women_women" INNER JOIN "
+women_category" ON ("women_women"."cat_id" = "women_category"."id") ORDER BY "wome
+n_women"."time_create" DESC, "women_women"."title" ASC', 'time': '0.000'}, {'sql':
+ 'SELECT "women_women"."cat_id", COUNT("women_women"."id") AS "id__count" FROM "wo
+men_women" GROUP BY "women_women"."cat_id" LIMIT 21', 'time': '0.000'}, {'sql': 'S
+ELECT "women_women"."id", "women_women"."title", "women_women"."slug", "women_wome
+n"."content", "women_women"."photo", "women_women"."time_create", "women_women"."t
+ime_update", "women_women"."is_published", "women_women"."cat_id", COUNT("women_wo
+men"."cat_id") AS "cat__count" FROM "women_women" GROUP BY "women_women"."id", "wo
+men_women"."title", "women_women"."slug", "women_women"."content", "women_women"."
+photo", "women_women"."time_create", "women_women"."time_update", "women_women"."i
+s_published", "women_women"."cat_id" LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT
+"women_category"."id", "women_category"."name", "women_category"."slug", COUNT("wo
+men_women"."id") AS "women__count" FROM "women_category" LEFT OUTER JOIN "women_wo
+men" ON ("women_category"."id" = "women_women"."cat_id") GROUP BY "women_category"
+."id", "women_category"."name", "women_category"."slug" LIMIT 21', 'time': '0.000'
+}, {'sql': 'SELECT "women_category"."id", "women_category"."name", "women_category
+"."slug", COUNT("women_women"."id") AS "women__count" FROM "women_category" LEFT O
+UTER JOIN "women_women" ON ("women_category"."id" = "women_women"."cat_id") GROUP
+BY "women_category"."id", "women_category"."name", "women_category"."slug" LIMIT 1
+', 'time': '0.000'}, {'sql': 'SELECT "women_category"."id", "women_category"."name
+", "women_category"."slug", COUNT("women_women"."id") AS "women__count" FROM "wome
+n_category" LEFT OUTER JOIN "women_women" ON ("women_category"."id" = "women_women
+"."cat_id") GROUP BY "women_category"."id", "women_category"."name", "women_catego
+ry"."slug" LIMIT 1 OFFSET 1', 'time': '0.000'}, {'sql': 'SELECT "women_category"."
+id", "women_category"."name", "women_category"."slug", COUNT("women_women"."id") A
+S "total" FROM "women_category" LEFT OUTER JOIN "women_women" ON ("women_category"
+."id" = "women_women"."cat_id") GROUP BY "women_category"."id", "women_category"."
+name", "women_category"."slug" LIMIT 1 OFFSET 1', 'time': '0.000'}, {'sql': 'SELEC
+T "women_category"."id", "women_category"."name", "women_category"."slug", COUNT("
+women_women"."id") AS "total" FROM "women_category" LEFT OUTER JOIN "women_women"
+ON ("women_category"."id" = "women_women"."cat_id") GROUP BY "women_category"."id"
+, "women_category"."name", "women_category"."slug"', 'time': '0.000'}, {'sql': 'SE
+LECT "women_category"."id", "women_category"."name", "women_category"."slug", COUN
+T("women_women"."id") AS "total" FROM "women_category" LEFT OUTER JOIN "women_wome
+n" ON ("women_category"."id" = "women_women"."cat_id") GROUP BY "women_category"."
+id", "women_category"."name", "women_category"."slug" HAVING COUNT("women_women"."
+id") > 0 LIMIT 21', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_w
+omen"."title", "women_women"."slug", "women_women"."content", "women_women"."photo
+", "women_women"."time_create", "women_women"."time_update", "women_women"."is_pub
+lished", "women_women"."cat_id" FROM "women_women" WHERE "women_women"."id" > ("wo
+men_women"."cat_id") ORDER BY "women_women"."time_create" DESC, "women_women"."tit
+le" ASC LIMIT 21', 'time': '0.000'}]
+>>> Women.objects.filter(slug='bejonse').update(views=F('views')+1)
+Traceback (most recent call last):
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\options.py", line 681, in get_field
+    return self.fields_map[field_name]
+KeyError: 'views'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1188, in update
+    query.add_update_values(kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\subqueries.py", line 88, in add_update_values
+    field = self.get_meta().get_field(name)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Women has no field named 'views'
+>>> #views
+>>> Women.objects.filter(slug='bejonse').update(views=F('views')+1)
+Traceback (most recent call last):
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\options.py", line 681, in get_field
+    return self.fields_map[field_name]
+KeyError: 'views'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\query.py", line 1188, in update
+    query.add_update_values(kwargs)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\sql\subqueries.py", line 88, in add_update_values
+    field = self.get_meta().get_field(name)
+  File "C:\Users\user\PycharmProjects\SelfEdu20230605\venv\lib\site-packages\djang
+o\db\models\options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Women has no field named 'views'
+>>> w = Women.objects.get(pk=1)
+>>> w
+<Women: ????????? ?????>
+>>> w.views = F('views')+1
+>>> w.save()
+>>> from django.db.models.functions import Length
+>>> ps = Women.objects.annotate(len=Length('title'))
+>>> ps
+<QuerySet [<Women: ?????? ??????>, <Women: ????????? ????>, <Women: ?????? ??????>
+, <Women: ????????? ?????>, <Women: ??????>, <Women: ??????>, <Women: ????? ?????>
+, <Women: ???????>, <Women: ?????? ??????>, <Women: ??? ??????>, <Women: ????? ???
+??>, <Women: ?????? ???????>, <Women: ????????? ???????>, <Women: ????????? ?????>
+]>
+>>> for item in ps:
+...     print(item.title, item.len)
+...
+?????? ?????? 13
+????????? ???? 14
+?????? ?????? 13
+????????? ????? 15
+?????? 6
+?????? 6
+????? ????? 11
+??????? 7
+?????? ?????? 13
+??? ?????? 10
+????? ????? 11
+?????? ??????? 14
+????????? ??????? 17
+????????? ????? 15
+>>> for item in ps:
+... if item.title > 9:
+  File "<console>", line 2
+    if item.title > 9:
+    ^
+IndentationError: expected an indented block
+>>>     print(item.title, item.len)
+  File "<console>", line 1
+    print(item.title, item.len)
+    ^
+IndentationError: unexpected indent
+>>> for item in ps:
+...     print(item.title, item.len)
+...
+?????? ?????? 13
+????????? ???? 14
+?????? ?????? 13
+????????? ????? 15
+?????? 6
+?????? 6
+????? ????? 11
+??????? 7
+?????? ?????? 13
+??? ?????? 10
+????? ????? 11
+?????? ??????? 14
+????????? ??????? 17
+????????? ????? 15
+>>> Women.objects.raw('SELECT * FROM women_women')
+<RawQuerySet: SELECT * FROM women_women>
+>>>  w = _
+  File "<console>", line 1
+    w = _
+    ^
+IndentationError: unexpected indent
+>>> a = _
+>>> for p in a:
+...     print(p.pk, p.title)
+...
+1 ????????? ?????
+2 ????????? ???????
+3 ?????? ???????
+4 ????? ?????
+5 ??? ??????
+6 ?????? ??????
+7 ???????
+8 ????? ?????
+9 ??????
+10 ??????
+11 ????????? ?????
+12 ?????? ??????
+13 ????????? ????
+14 ?????? ??????
+>>> q = Category.objects.raw('SELECT * FROM women_women')
+>>> q[0]
+<Category: ???????>
+>>> from django.db import reset_queries
+>>> reset_queries()
+>>> connection_queries
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'connection_queries' is not defined
+>>> connection.queries
+[]
+>>> w = Women.objects.raw('SELECT * FROM women_women')
+>>> connection.queries
+[]
+>>> w[0]
+<Women: ????????? ?????>
+>>> connection.queries
+[{'sql': 'SELECT * FROM women_women', 'time': '0.000'}]
+>>> w = Women.objects.raw('SELECT id, title  FROM women_women')
+>>> w
+<RawQuerySet: SELECT id, title  FROM women_women>
+>>> w[0].is_published
+True
+>>> connection.queries
+[{'sql': 'SELECT * FROM women_women', 'time': '0.000'}, {'sql': 'SELECT id, title
+ FROM women_women', 'time': '0.000'}, {'sql': 'SELECT "women_women"."id", "women_w
+omen"."is_published" FROM "women_women" WHERE "women_women"."id" = 1 LIMIT 21', 't
+ime': '0.016'}]
+>>> Women.objects.raw('SELECT id, title FROM women_women WHERE slug="shakira"')
+<RawQuerySet: SELECT id, title FROM women_women WHERE slug="shakira">
+>>> Women.objects.raw("SELECT id, title FROM women_women WHERE slug='shakira'")
+<RawQuerySet: SELECT id, title FROM women_women WHERE slug='shakira'>
+>>> slug = 'shakira'
+>>> Women.objects.raw("SELECT id, title FROM women_women WHERE slug='"+ slug "'")
+  File "<console>", line 1
+    Women.objects.raw("SELECT id, title FROM women_women WHERE slug='"+ slug "'")
+                                                                             ^
+SyntaxError: invalid syntax
+>>> Women.objects.raw("SELECT id, title FROM women_women WHERE slug='"+ slug "'")
+
+  File "<console>", line 1
+    Women.objects.raw("SELECT id, title FROM women_women WHERE slug='"+ slug "'")
+                                                                             ^
+SyntaxError: invalid syntax
+>>> Women.objects.raw("SELECT id, title FROM women_women WHERE slug='"+ slug + "'"
+)
+<RawQuerySet: SELECT id, title FROM women_women WHERE slug='shakira'>
+>>> Women.objects.raw("SELECT id, title FROM women_women WHERE slug='%s'", [slug])
+
+<RawQuerySet: SELECT id, title FROM women_women WHERE slug='shakira'>
+>>>
